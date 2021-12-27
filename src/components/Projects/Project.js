@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const Project = (props) => {
   return (
     <div>
       <h1>Project</h1>
       <table className="main-content" border="2">
         <thead>
-          <tr className="font-blue">
+          <tr className="font-red">
             <th>Tên dự án</th>
             <th>Project Manager</th>
             <th>Ngày bắt đầu</th>
@@ -20,7 +19,7 @@ const Project = (props) => {
           {props.project.map((project) => (
             <tr key={project.id}>
               <td>{project.tenProject}</td>
-              <td>{project.idNguoiDung}</td>
+              <td>{project.idProjectManager}</td>
               <td>{project.ngayBatDau}</td>
               <td>{project.tongThoiGianLam}</td>
               <td>{project.idTrangThai}</td>
@@ -31,6 +30,9 @@ const Project = (props) => {
           ))}
         </tbody>
       </table>
+      <div>
+        <Link to="/project/create">Tạo project mới</Link>
+      </div>
     </div>
   );
 };

@@ -27,6 +27,10 @@
   color: royalblue;
 }
 
+.font-red {
+  color: crimson;
+}
+
 td {
   padding: 10px;
 }

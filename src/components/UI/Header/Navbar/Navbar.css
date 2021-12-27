@@ -28,7 +28,8 @@
 }
 
 .navBarLink a:hover {
-  color: goldenrod;
+  /* color: royalblue; */
+
   text-decoration: none;
 }
 
