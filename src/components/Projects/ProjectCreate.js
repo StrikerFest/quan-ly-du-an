@@ -8,9 +8,10 @@ class ProjectCreate extends Component {
       tenProject: "",
       ngayBatDau: "",
       tongThoiGianLam: "",
-      idProjectManager: "",
-      idTrangThai: "",
+      idProjectManager: "2",
+      idTrangThai: "1",
       trangThai: [],
+      projectManager: [],
     };
     this.changeTenHandler = this.changeTenHandler.bind(this);
     this.changeNgayBatDauHandler = this.changeNgayBatDauHandler.bind(this);
@@ -26,6 +27,11 @@ class ProjectCreate extends Component {
       .get("http://localhost:8080/api/vi/trangThaiProject")
       .then((response) => {
         this.setState({ trangThai: response.data });
+      });
+    axios
+      .get("http://localhost:8080/api/vi/projectManager")
+      .then((response) => {
+        this.setState({ projectManager: response.data });
       });
   }
   //
@@ -46,9 +52,7 @@ class ProjectCreate extends Component {
       },
     };
 
-    axios
-      .post(`http://localhost:8080/api/vi/project`, project, config)
-      .then((res) => {});
+    axios.post(`http://localhost:8080/api/vi/project`, project, config);
   };
 
   changeTenHandler = (event) => {
@@ -72,7 +76,6 @@ class ProjectCreate extends Component {
   };
 
   render() {
-    // console.log(this.state.trangThai);
     const styleTable = {
       border: "1px solid black",
       margin: "0 auto",
@@ -123,12 +126,22 @@ class ProjectCreate extends Component {
               <tr>
                 <td>Project manager :</td>
                 <td>
-                  <input
+                  {/* <input
                     type="text"
                     name="projectManager"
                     value={this.state.idProjectManager}
                     onChange={this.changeIdProjectManagerHandler}
-                  />
+                  /> */}
+                  <select
+                    value={this.state.idProjectManager}
+                    onChange={this.changeIdTrangThaiHandler}
+                  >
+                    {this.state.projectManager.map((projectManager) => (
+                      <option value={projectManager.id} key={projectManager.id}>
+                        {projectManager.tenNhanSu}
+                      </option>
+                    ))}
+                  </select>
                 </td>
               </tr>
               <tr>
@@ -141,7 +154,7 @@ class ProjectCreate extends Component {
                     onChange={this.changeIdTrangThaiHandler}
                   /> */}
                   <select
-                    value={this.state.id}
+                    value={this.state.idTrangThai}
                     onChange={this.changeIdTrangThaiHandler}
                   >
                     {this.state.trangThai.map((trangThai) => (
