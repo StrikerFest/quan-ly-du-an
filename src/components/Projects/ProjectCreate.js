@@ -52,7 +52,7 @@ class ProjectCreate extends Component {
       },
     };
 
-    axios.post(`http://localhost:8080/api/vi/project`, project, config);
+    axios.post(`http://localhost:8080/api/vi/project/create`, project, config);
   };
 
   changeTenHandler = (event) => {

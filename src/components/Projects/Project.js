@@ -29,6 +29,7 @@ const Project = (props) => {
               <td>
                 <button
                   onClick={() => {
+                    
                     props.deleteProject(project.id);
                   }}
                 >
