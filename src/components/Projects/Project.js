@@ -21,15 +21,24 @@ const Project = (props) => {
           {props.project.map((project) => (
             <tr key={project.id}>
               <td>{project.tenProject}</td>
-              <td>{project.idProjectManager}</td>
+              {/* <td>{project.idProjectManager}</td> */}
+              <td>
+                {props.nhanVien.map((NV) =>
+                  project.idProjectManager === NV.id ? NV.tenNhanSu : ""
+                )}
+              </td>
               <td>{project.ngayBatDau}</td>
               <td>{project.tongThoiGianLam}</td>
-              <td>{project.idTrangThai}</td>
+              {/* <td>{project.idTrangThai}</td> */}
+              <td>
+                {props.trangThaiProject.map((TT) =>
+                  project.idTrangThai === TT.id ? TT.tenTrangThai : ""
+                )}
+              </td>
               <td></td>
               <td>
                 <button
                   onClick={() => {
-                    
                     props.deleteProject(project.id);
                   }}
                 >

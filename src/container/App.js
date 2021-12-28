@@ -19,6 +19,7 @@ class App extends Component {
       project: [],
       task: [],
       nhanVien: [],
+      trangThaiProject: [],
     };
 
     this.deleteProject = this.deleteProject.bind(this);
@@ -44,6 +45,12 @@ class App extends Component {
     axios.get("http://localhost:8080/api/vi/nhanSu").then((response) => {
       this.setState({ nhanVien: response.data });
     });
+
+    axios
+      .get("http://localhost:8080/api/vi/trangThaiProject")
+      .then((response) => {
+        this.setState({ trangThaiProject: response.data });
+      });
   }
 
   render() {
@@ -59,6 +66,8 @@ class App extends Component {
                   <Project
                     project={this.state.project}
                     deleteProject={this.deleteProject}
+                    trangThaiProject={this.state.trangThaiProject}
+                    nhanVien={this.state.nhanVien}
                   />
                 }
               />
@@ -68,6 +77,8 @@ class App extends Component {
                   <Project
                     project={this.state.project}
                     deleteProject={this.deleteProject}
+                    trangThaiProject={this.state.trangThaiProject}
+                    nhanVien={this.state.nhanVien}
                   />
                 }
               />
