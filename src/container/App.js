@@ -9,6 +9,7 @@ import Task from "../components/Tasks/Task";
 import Employee from "../components/Employees/Employee";
 import axios from "axios";
 import ProjectCreate from "../components/Projects/ProjectCreate";
+import ProjectService from "../services/Projects/ProjectService";
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +21,15 @@ class App extends Component {
       nhanVien: [],
     };
 
+    this.deleteProject = this.deleteProject.bind(this);
+  }
+
+  deleteProject(id) {
+    ProjectService.deleteProject(id).then((res) => {
+      this.setState({
+        project: this.state.project.filter((project) => project.id !== id),
+      });
+    });
   }
 
   componentDidMount() {
@@ -42,26 +52,30 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <div className="main-content">
-            
-            <Routes >
+            <Routes>
               <Route
                 path="/"
-                element={<Project project={this.state.project} />}
+                element={
+                  <Project
+                    project={this.state.project}
+                    deleteProject={this.deleteProject}
+                  />
+                }
               />
               <Route
                 path="/project"
-                element={<Project project={this.state.project} />}
+                element={
+                  <Project
+                    project={this.state.project}
+                    deleteProject={this.deleteProject}
+                  />
+                }
               />
-              <Route  
+              <Route
                 path="/project/chiTiet"
                 element={<ProjectDetail project={this.state.project} />}
               />
-              <Route
-                path="/project/create"
-                element={
-                  <ProjectCreate/>
-                }
-              />
+              <Route path="/project/create" element={<ProjectCreate />} />
               <Route
                 path="/congViec"
                 element={<Task task={this.state.task} />}
@@ -73,7 +87,6 @@ class App extends Component {
             </Routes>
           </div>
         </div>
-                
       </BrowserRouter>
     );
   }

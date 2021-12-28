@@ -10,6 +10,10 @@ class ProjectService {
   createProject(project) {
     return axios.post(PROJECTS_REST_API_URL, project);
   }
+
+  deleteProject(projectId) {
+    return axios.delete(PROJECTS_REST_API_URL + "/" + projectId);
+  }
 }
 
 export default new ProjectService();
