@@ -14,6 +14,9 @@ import EmployeeService from "../services/Employees/EmployeeService";
 import EmployeeCreate from "../components/Employees/EmployeeCreate";
 import TaskCreate from "../components/Tasks/TaskCreate";
 import TaskService from "../services/Tasks/TaskService";
+import PhongBanCreate from "../components/PhongBan/PhongBanCreate";
+import PhongBan from "../components/PhongBan/PhongBan";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +25,15 @@ class App extends Component {
       project: [],
       task: [],
       nhanVien: [],
+      phongBan: [],
       trangThaiProject: [],
+      trangThaiTask: [],
     };
 
     this.deleteProject = this.deleteProject.bind(this);
     this.deleteNhanVien = this.deleteNhanVien.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.deletePhongBan = this.deletePhongBan.bind(this);
   }
 
   deleteProject(id) {
@@ -53,6 +59,14 @@ class App extends Component {
       });
     });
   }
+  deletePhongBan(id) {
+    // PhongBanService.deletePhongBan(id).then((res) => {
+    //   this.setState({
+    //     phongBan: this.state.phongBan.filter((phongBan) => phongBan.id !== id),
+    //   });
+    // });
+    console.log(`Phong ban id ${id} deleted`);
+  }
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/vi/project").then((response) => {
@@ -67,11 +81,19 @@ class App extends Component {
       this.setState({ nhanVien: response.data });
     });
 
+    axios.get("http://localhost:8080/api/vi/phongBan").then((response) => {
+      this.setState({ phongBan: response.data });
+    });
+
     axios
       .get("http://localhost:8080/api/vi/trangThaiProject")
       .then((response) => {
         this.setState({ trangThaiProject: response.data });
       });
+
+    axios.get("http://localhost:8080/api/vi/trangThaiTask").then((response) => {
+      this.setState({ trangThaiTask: response.data });
+    });
   }
 
   render() {
@@ -110,6 +132,7 @@ class App extends Component {
               <Route path="/project/create" element={<ProjectCreate />} />
               <Route path="/nhanVien/create" element={<EmployeeCreate />} />
               <Route path="/task/create" element={<TaskCreate />} />
+              <Route path="/phongBan/create" element={<PhongBanCreate />} />
               <Route
                 path="/congViec"
                 element={
@@ -122,6 +145,18 @@ class App extends Component {
                   <Employee
                     employee={this.state.nhanVien}
                     deleteNhanVien={this.deleteNhanVien}
+                  />
+                }
+              />
+              <Route
+                path="/phongBan"
+                element={
+                  <PhongBan
+                    phongBan={this.state.phongBan}
+                    nhanVien={this.state.nhanVien}
+                    trangThaiTask={this.state.trangThaiTask}
+                    task={this.state.task}
+                    deletePhongBan={this.deleteNhanVien}
                   />
                 }
               />
