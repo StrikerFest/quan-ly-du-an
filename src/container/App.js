@@ -10,6 +10,7 @@ import Employee from "../components/Employees/Employee";
 import axios from "axios";
 import ProjectCreate from "../components/Projects/ProjectCreate";
 import ProjectService from "../services/Projects/ProjectService";
+import EmployeeService from "../services/Employees/EmployeeService";
 import EmployeeCreate from "../components/Employees/EmployeeCreate";
 
 class App extends Component {
@@ -24,12 +25,21 @@ class App extends Component {
     };
 
     this.deleteProject = this.deleteProject.bind(this);
+    this.deleteNhanVien = this.deleteNhanVien.bind(this);
   }
 
   deleteProject(id) {
     ProjectService.deleteProject(id).then((res) => {
       this.setState({
         project: this.state.project.filter((project) => project.id !== id),
+      });
+    });
+  }
+
+  deleteNhanVien(id) {
+    EmployeeService.deleteNhanVien(id).then((res) => {
+      this.setState({
+        nhanVien: this.state.nhanVien.filter((nhanVien) => nhanVien.id !== id),
       });
     });
   }
@@ -95,7 +105,12 @@ class App extends Component {
               />
               <Route
                 path="/nhanVien"
-                element={<Employee employee={this.state.nhanVien} />}
+                element={
+                  <Employee
+                    employee={this.state.nhanVien}
+                    deleteNhanVien={this.deleteNhanVien}
+                  />
+                }
               />
             </Routes>
           </div>

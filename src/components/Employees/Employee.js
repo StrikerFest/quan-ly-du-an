@@ -12,6 +12,8 @@ const Employee = (props) => {
             <th>Số điện thoại</th>
             <th>Email</th>
             <th>Chức vụ</th>
+            <th>Thay đổi</th>
+            <th>Xóa</th>
             <th>Xem chi tiết</th>
           </tr>
         </thead>
@@ -21,7 +23,27 @@ const Employee = (props) => {
               <td>{employee.tenNhanSu}</td>
               <td>{employee.soDienThoai}</td>
               <td>{employee.email}</td>
-              <td>{employee.quyenHan}</td>
+              <td>
+                {employee.quyenHan == 0
+                  ? "Super admin"
+                  : employee.quyenHan == 1
+                  ? "Admin"
+                  : employee.quyenHan == 2
+                  ? "PM"
+                  : employee.quyenHan == 3
+                  ? "Nhân viên"
+                  : "Lỗi"}
+              </td>
+              <td></td>
+              <td>
+                <button
+                  onClick={() => {
+                    props.deleteNhanVien(employee.id);
+                  }}
+                >
+                  Delete
+                </button>
+              </td>
               <td>Xem chi tiết</td>
             </tr>
           ))}
