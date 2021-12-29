@@ -10,6 +10,7 @@ import Employee from "../components/Employees/Employee";
 import axios from "axios";
 import ProjectCreate from "../components/Projects/ProjectCreate";
 import ProjectService from "../services/Projects/ProjectService";
+import EmployeeCreate from "../components/Employees/EmployeeCreate";
 
 class App extends Component {
   constructor(props) {
@@ -87,6 +88,7 @@ class App extends Component {
                 element={<ProjectDetail project={this.state.project} />}
               />
               <Route path="/project/create" element={<ProjectCreate />} />
+              <Route path="/nhanVien/create" element={<EmployeeCreate />} />
               <Route
                 path="/congViec"
                 element={<Task task={this.state.task} />}

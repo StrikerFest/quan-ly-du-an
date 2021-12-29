@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Employee = (props) => {
   return (
@@ -26,6 +27,9 @@ const Employee = (props) => {
           ))}
         </tbody>
       </table>
+      <div>
+        <Link to="/nhanVien/create">Thêm nhân viên mới</Link>
+      </div>
     </div>
   );
 };
