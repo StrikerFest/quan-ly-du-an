@@ -5,46 +5,39 @@ class PhongBanCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tenProject: "",
-      ngayBatDau: "",
-      tongThoiGianLam: "",
-      idProjectManager: "2",
-      idTrangThai: "1",
-      trangThai: [],
-      projectManager: [],
+      idDuAn: "2",
+      idCongViec: "2",
+      idNhanVien: "2",
+      project: [],
+      task: [],
+      nhanVien: [],
     };
-    this.changeTenHandler = this.changeTenHandler.bind(this);
-    this.changeNgayBatDauHandler = this.changeNgayBatDauHandler.bind(this);
-    this.changeTongThoiGianLamHandler =
-      this.changeTongThoiGianLamHandler.bind(this);
-    this.changeIdProjectManagerHandler =
-      this.changeIdProjectManagerHandler.bind(this);
-    this.changeIdTrangThaiHandler = this.changeIdTrangThaiHandler.bind(this);
+    this.changeIdDuAnHandler = this.changeIdDuAnHandler.bind(this);
+    this.changeIdCongViecHandler = this.changeIdCongViecHandler.bind(this);
+    this.changeIdNhanVienHandler = this.changeIdNhanVienHandler.bind(this);
   }
 
   componentDidMount() {
-    axios
-      .get("http://localhost:8080/api/vi/trangThaiProject")
-      .then((response) => {
-        this.setState({ trangThai: response.data });
-      });
-    axios
-      .get("http://localhost:8080/api/vi/projectManager")
-      .then((response) => {
-        this.setState({ projectManager: response.data });
-      });
+    axios.get("http://localhost:8080/api/vi/project").then((response) => {
+      this.setState({ project: response.data });
+    });
+    axios.get("http://localhost:8080/api/vi/task").then((response) => {
+      this.setState({ task: response.data });
+    });
+
+    axios.get("http://localhost:8080/api/vi/nhanSu").then((response) => {
+      this.setState({ nhanVien: response.data });
+    });
   }
   //
-  saveProject = (e) => {
+  savePhongBan = (e) => {
     // e.preventDefault();
-    let project = {
-      tenProject: this.state.tenProject,
-      ngayBatDau: this.state.ngayBatDau,
-      tongThoiGianLam: this.state.tongThoiGianLam,
-      idProjectManager: this.state.idProjectManager,
-      idTrangThai: this.state.idTrangThai,
+    let phongBan = {
+      idDuAn: this.state.idDuAn,
+      idCongViec: this.state.idCongViec,
+      idNhanVien: this.state.idNhanVien,
     };
-    console.log("project => " + JSON.stringify(project));
+    console.log("phongBan => " + JSON.stringify(phongBan));
     let config = {
       headers: {
         "Content-Type": "application/json",
@@ -52,27 +45,23 @@ class PhongBanCreate extends Component {
       },
     };
 
-    axios.post(`http://localhost:8080/api/vi/project/create`, project, config);
+    axios.post(
+      `http://localhost:8080/api/vi/phongBan/create`,
+      phongBan,
+      config
+    );
   };
 
-  changeTenHandler = (event) => {
-    this.setState({ tenProject: event.target.value });
+  changeIdDuAnHandler = (event) => {
+    this.setState({ idDuAn: event.target.value });
   };
 
-  changeNgayBatDauHandler = (event) => {
-    this.setState({ ngayBatDau: event.target.value });
+  changeIdCongViecHandler = (event) => {
+    this.setState({ idCongViec: event.target.value });
   };
 
-  changeTongThoiGianLamHandler = (event) => {
-    this.setState({ tongThoiGianLam: event.target.value });
-  };
-
-  changeIdProjectManagerHandler = (event) => {
-    this.setState({ idProjectManager: event.target.value });
-  };
-
-  changeIdTrangThaiHandler = (event) => {
-    this.setState({ idTrangThai: event.target.value });
+  changeIdNhanVienHandler = (event) => {
+    this.setState({ idNhanVien: event.target.value });
   };
 
   render() {
@@ -86,65 +75,57 @@ class PhongBanCreate extends Component {
     return (
       <div>
         {/* <button onClick={this.some}>HAYEAYEDHASDN</button> */}
-        <h1>Project</h1>
+        <h1>Phân công</h1>
         <form>
           <table style={styleTable}>
             <tbody>
               <tr>
-                <td>Tên :</td>
+                <td>Project :</td>
                 <td>
-                  <input
-                    type="text"
-                    name="ten"
-                    value={this.state.tenProject}
-                    onChange={this.changeTenHandler}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Ngày bắt đầu :</td>
-                <td>
-                  <input
-                    type="date"
-                    name="ngayBatDau"
-                    value={this.state.ngayBatDau}
-                    onChange={this.changeNgayBatDauHandler}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Tổng thời gian làm :</td>
-                <td>
-                  <input
-                    type="text"
-                    name="tongThoiGian"
-                    value={this.state.tongThoiGianLam}
-                    onChange={this.changeTongThoiGianLamHandler}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Project manager :</td>
-                <td>
-                  <select onChange={this.changeIdProjectManagerHandler}>
-                    {this.state.projectManager.map((projectManager) => (
-                      <option value={projectManager.id} key={projectManager.id}>
-                        {projectManager.tenNhanSu}
+                  <select onChange={this.changeIdDuAnHandler}>
+                    <option defaultValue="true">Chọn project</option>
+                    {this.state.project.map((project) => (
+                      <option value={project.id} key={project.id}>
+                        {project.tenProject}
                       </option>
                     ))}
                   </select>
                 </td>
               </tr>
               <tr>
-                <td>Trạng thái :</td>
+                <td>Công việc :</td>
                 <td>
                   <select
                     value={this.state.idTrangThai}
-                    onChange={this.changeIdTrangThaiHandler}
+                    onChange={this.changeIdCongViecHandler}
                   >
-                    {this.state.trangThai.map((trangThai) => (
-                      <option value={trangThai.id} key={trangThai.id}>
-                        {trangThai.tenTrangThai}
+                    <option defaultValue="true">Chọn công việc</option>
+                    {this.state.task.map((task) => (
+                      <option value={task.id} key={task.id}>
+                        {task.tenTask}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Nhân viên :</td>
+                <td>
+                  <select onChange={this.changeIdNhanVienHandler}>
+                    <option defaultValue="true">Chọn nhân viên</option>
+
+                    {this.state.nhanVien.map((nhanVien) => (
+                      <option value={nhanVien.id} key={nhanVien.id}>
+                        {nhanVien.tenNhanSu} -
+                        {nhanVien.quyenHan == 0
+                          ? " SuperAdmin"
+                          : nhanVien.quyenHan == 1
+                          ? " Admin"
+                          : nhanVien.quyenHan == 2
+                          ? " PM"
+                          : nhanVien.quyenHan == 3
+                          ? "Nhân viên"
+                          : ""}
                       </option>
                     ))}
                   </select>
@@ -152,7 +133,7 @@ class PhongBanCreate extends Component {
               </tr>
               <tr>
                 <td colSpan="2">
-                  <button type="submit" onClick={this.saveProject}>
+                  <button type="submit" onClick={this.savePhongBan}>
                     Nhập
                   </button>
                 </td>

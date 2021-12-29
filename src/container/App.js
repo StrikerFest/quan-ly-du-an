@@ -17,7 +17,7 @@ import TaskService from "../services/Tasks/TaskService";
 import PhongBanCreate from "../components/PhongBan/PhongBanCreate";
 import PhongBan from "../components/PhongBan/PhongBan";
 import PhongBanChiTiet from "../components/PhongBan/PhongBanChiTiet";
-// import PhongBanService from "../services/PhongBan/PhongBanService";
+import PhongBanService from "../services/PhongBan/PhongBanService";
 
 class App extends Component {
   constructor(props) {
@@ -63,13 +63,18 @@ class App extends Component {
       });
     });
   }
-  deletePhongBan(id) {
-    // PhongBanService.deletePhongBan(id).then((res) => {
+  deletePhongBan(idDuAn, idCongViec, idNhanVien) {
+    PhongBanService.deletePhongBan(idDuAn, idCongViec, idNhanVien).then(
+      window.location.reload()
+    );
+
+    // (res) => {
     //   this.setState({
-    //     phongBan: this.state.phongBan.filter((phongBan) => phongBan.id !== id),
+    //     phongBan: this.state.phongBan.filter((phongBan) => {}),
     //   });
-    // });
-    console.log(`Phong ban id ${id} deleted`);
+    // }
+
+    console.log(`Phong ban id ${idDuAn} ${idCongViec} ${idNhanVien} deleted`);
   }
 
   // getPhongBanChiTiet(id) {
@@ -184,7 +189,7 @@ class App extends Component {
                     nhanVien={this.state.nhanVien}
                     trangThaiTask={this.state.trangThaiTask}
                     task={this.state.task}
-                    deletePhongBan={this.deleteNhanVien}
+                    deletePhongBan={this.deletePhongBan}
                   />
                 }
               />

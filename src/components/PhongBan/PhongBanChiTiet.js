@@ -23,6 +23,7 @@ const PhongBan = (props) => {
             <th>Nhân viên được phân công</th>
             <th>Trạng thái</th>
             <th>Thay đổi</th>
+            <th>Xóa</th>
           </tr>
         </thead>
         <tbody>
@@ -74,6 +75,19 @@ const PhongBan = (props) => {
                 )
               )}
               <td>Thay đổi</td>
+              <td>
+                <button
+                  onClick={() => {
+                    props.deletePhongBan(
+                      PB.idDuAn,
+                      PB.idCongViec,
+                      PB.idNhanVien
+                    );
+                  }}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

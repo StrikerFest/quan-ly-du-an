@@ -15,8 +15,16 @@ class PhongBanService {
     return axios.post(PHONG_BAN_REST_API_URL, phongBan);
   }
 
-  deletePhongBan(phongBanId) {
-    return axios.delete(PHONG_BAN_REST_API_URL + "/" + phongBanId);
+  deletePhongBan(idDuAn, idCongViec, idNhanVien) {
+    return axios.delete(
+      PHONG_BAN_REST_API_URL +
+        "/" +
+        idDuAn +
+        "/" +
+        idCongViec +
+        "/" +
+        idNhanVien
+    );
   }
 }
 
