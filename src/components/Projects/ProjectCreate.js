@@ -126,12 +126,6 @@ class ProjectCreate extends Component {
               <tr>
                 <td>Project manager :</td>
                 <td>
-                  {/* <input
-                    type="text"
-                    name="projectManager"
-                    value={this.state.idProjectManager}
-                    onChange={this.changeIdProjectManagerHandler}
-                  /> */}
                   <select onChange={this.changeIdProjectManagerHandler}>
                     {this.state.projectManager.map((projectManager) => (
                       <option value={projectManager.id} key={projectManager.id}>
@@ -144,12 +138,6 @@ class ProjectCreate extends Component {
               <tr>
                 <td>Trạng thái :</td>
                 <td>
-                  {/* <input
-                    type="text"
-                    name="trangThai"
-                    value={this.state.idTrangThai}
-                    onChange={this.changeIdTrangThaiHandler}
-                  /> */}
                   <select
                     value={this.state.idTrangThai}
                     onChange={this.changeIdTrangThaiHandler}

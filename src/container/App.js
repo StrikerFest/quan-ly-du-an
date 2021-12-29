@@ -12,7 +12,8 @@ import ProjectCreate from "../components/Projects/ProjectCreate";
 import ProjectService from "../services/Projects/ProjectService";
 import EmployeeService from "../services/Employees/EmployeeService";
 import EmployeeCreate from "../components/Employees/EmployeeCreate";
-
+import TaskCreate from "../components/Tasks/TaskCreate";
+import TaskService from "../services/Tasks/TaskService";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +27,7 @@ class App extends Component {
 
     this.deleteProject = this.deleteProject.bind(this);
     this.deleteNhanVien = this.deleteNhanVien.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   deleteProject(id) {
@@ -40,6 +42,14 @@ class App extends Component {
     EmployeeService.deleteNhanVien(id).then((res) => {
       this.setState({
         nhanVien: this.state.nhanVien.filter((nhanVien) => nhanVien.id !== id),
+      });
+    });
+  }
+
+  deleteTask(id) {
+    TaskService.deleteTask(id).then((res) => {
+      this.setState({
+        task: this.state.task.filter((task) => task.id !== id),
       });
     });
   }
@@ -99,9 +109,12 @@ class App extends Component {
               />
               <Route path="/project/create" element={<ProjectCreate />} />
               <Route path="/nhanVien/create" element={<EmployeeCreate />} />
+              <Route path="/task/create" element={<TaskCreate />} />
               <Route
                 path="/congViec"
-                element={<Task task={this.state.task} />}
+                element={
+                  <Task task={this.state.task} deleteTask={this.deleteTask} />
+                }
               />
               <Route
                 path="/nhanVien"
