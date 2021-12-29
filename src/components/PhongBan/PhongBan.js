@@ -13,14 +13,67 @@ const PhongBan = (props) => {
             <th>Nhân viên được phân công</th>
             <th>Trạng thái</th>
             <th>Thay đổi</th>
-            <th>Xóa</th>
             <th>Xem chi tiết</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {props.phongBan.map((PB) => (
+            <tr key={PB.index}>
+              {/* Hiển thị tên project */}
+              {props.project.map((P) =>
+                PB.idDuAn === P.id ? <td>{P.tenProject}</td> : ""
+              )}
+              {/* Hiển thị tên project manager */}
+              {props.project.map((P) =>
+                PB.idDuAn === P.id ? (
+                  <>
+                    {props.nhanVien.map((NV) =>
+                      P.idProjectManager === NV.id ? (
+                        <td>{NV.tenNhanSu}</td>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </>
+                ) : (
+                  ""
+                )
+              )}
+              {/* Hiển thị tên công việc */}
+              {/* <td>{PB.idCongViec}</td> */}
+              {props.task.map((T) =>
+                PB.idCongViec === T.id ? <td>{T.tenTask}</td> : ""
+              )}
+              {/* Hiển thị nhân viên được phân công */}
+              {props.nhanVien.map((NV) =>
+                PB.idNhanVien === NV.id ? <td>{NV.tenNhanSu}</td> : ""
+              )}
+              {/* Hiển thị trạng thái hiện tại của công việc */}
+              {props.task.map((T) =>
+                PB.idCongViec === T.id ? (
+                  <>
+                    {props.trangThaiTask.map((TTT) =>
+                      T.idTrangThai === TTT.id ? (
+                        <td>{TTT.tenTrangThaiTask}</td>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </>
+                ) : (
+                  ""
+                )
+              )}
+              <td>Thay đổi</td>
+              <td>
+                <Link to="/project/chiTiet">Xem chi tiết</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
       <div>
-        <Link to="/phongBan/create">Tạo project mới</Link>
+        <Link to="/phongBan/create">Tạo phân công mới</Link>
       </div>
     </div>
   );

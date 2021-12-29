@@ -152,6 +152,7 @@ class App extends Component {
                 path="/phongBan"
                 element={
                   <PhongBan
+                    project={this.state.project}
                     phongBan={this.state.phongBan}
                     nhanVien={this.state.nhanVien}
                     trangThaiTask={this.state.trangThaiTask}
