@@ -16,6 +16,7 @@ import TaskCreate from "../components/Tasks/TaskCreate";
 import TaskService from "../services/Tasks/TaskService";
 import PhongBanCreate from "../components/PhongBan/PhongBanCreate";
 import PhongBan from "../components/PhongBan/PhongBan";
+import PhongBanChiTiet from "../components/PhongBan/PhongBanChiTiet";
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class App extends Component {
       task: [],
       nhanVien: [],
       phongBan: [],
+      phongBanChiTiet: [],
       trangThaiProject: [],
       trangThaiTask: [],
     };
@@ -86,6 +88,12 @@ class App extends Component {
     });
 
     axios
+      .get("http://localhost:8080/api/vi/phongBanChiTiet")
+      .then((response) => {
+        this.setState({ phongBanChiTiet: response.data });
+      });
+
+    axios
       .get("http://localhost:8080/api/vi/trangThaiProject")
       .then((response) => {
         this.setState({ trangThaiProject: response.data });
@@ -134,7 +142,7 @@ class App extends Component {
               <Route path="/task/create" element={<TaskCreate />} />
               <Route path="/phongBan/create" element={<PhongBanCreate />} />
               <Route
-                path="/congViec"
+                path="/congViec"  
                 element={
                   <Task task={this.state.task} deleteTask={this.deleteTask} />
                 }
@@ -154,6 +162,17 @@ class App extends Component {
                   <PhongBan
                     project={this.state.project}
                     phongBan={this.state.phongBan}
+                    nhanVien={this.state.nhanVien}
+                    trangThaiProject={this.state.trangThaiProject}
+                  />
+                }
+              />
+              <Route
+                path="/phongBan/chiTiet"
+                element={
+                  <PhongBanChiTiet
+                    project={this.state.project}
+                    phongBan={this.state.phongBanChiTiet}
                     nhanVien={this.state.nhanVien}
                     trangThaiTask={this.state.trangThaiTask}
                     task={this.state.task}

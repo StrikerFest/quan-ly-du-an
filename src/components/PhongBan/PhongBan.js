@@ -9,8 +9,6 @@ const PhongBan = (props) => {
           <tr className="font-red">
             <th>Tên dự án</th>
             <th>Project Manager</th>
-            <th>Tên công việc</th>
-            <th>Nhân viên được phân công</th>
             <th>Trạng thái</th>
             <th>Thay đổi</th>
             <th>Xem chi tiết</th>
@@ -39,22 +37,13 @@ const PhongBan = (props) => {
                   ""
                 )
               )}
-              {/* Hiển thị tên công việc */}
-              {/* <td>{PB.idCongViec}</td> */}
-              {props.task.map((T) =>
-                PB.idCongViec === T.id ? <td>{T.tenTask}</td> : ""
-              )}
-              {/* Hiển thị nhân viên được phân công */}
-              {props.nhanVien.map((NV) =>
-                PB.idNhanVien === NV.id ? <td>{NV.tenNhanSu}</td> : ""
-              )}
               {/* Hiển thị trạng thái hiện tại của công việc */}
-              {props.task.map((T) =>
-                PB.idCongViec === T.id ? (
+              {props.project.map((P) =>
+                PB.idDuAn === P.id ? (
                   <>
-                    {props.trangThaiTask.map((TTT) =>
-                      T.idTrangThai === TTT.id ? (
-                        <td>{TTT.tenTrangThaiTask}</td>
+                    {props.trangThaiProject.map((TTP) =>
+                      P.idProjectManager === TTP.id ? (
+                        <td>{TTP.tenTrangThai}</td>
                       ) : (
                         ""
                       )
@@ -66,7 +55,7 @@ const PhongBan = (props) => {
               )}
               <td>Thay đổi</td>
               <td>
-                <Link to="/project/chiTiet">Xem chi tiết</Link>
+                <Link to="/phongBan/chiTiet">Xem chi tiết</Link>
               </td>
             </tr>
           ))}
