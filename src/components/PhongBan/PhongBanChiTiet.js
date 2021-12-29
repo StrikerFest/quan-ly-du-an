@@ -1,23 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 const PhongBan = (props) => {
+  const { id } = useParams();
+  const [phongBan, setPhongBan] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/vi/phongBan/" + id)
+      .then((response) => {
+        setPhongBan(response.data);
+      });
+  }, []);
   return (
     <div>
-      <h1>Phòng ban</h1>
+      <h1>Phòng ban dự án {id}</h1>
       <table className="main-content" border="2">
         <thead>
           <tr className="font-red">
-            <th>Tên dự án</th>
+            <th>Tên dự án X</th>
             <th>Project Manager</th>
             <th>Tên công việc</th>
             <th>Nhân viên được phân công</th>
             <th>Trạng thái</th>
             <th>Thay đổi</th>
-            <th>Xem chi tiết</th>
           </tr>
         </thead>
         <tbody>
-          {props.phongBan.map((PB) => (
+          {phongBan.map((PB) => (
             <tr key={PB.index}>
               {/* Hiển thị tên project */}
               {props.project.map((P) =>
@@ -65,9 +74,6 @@ const PhongBan = (props) => {
                 )
               )}
               <td>Thay đổi</td>
-              <td>
-                <Link to="/project/chiTiet">Xem chi tiết</Link>
-              </td>
             </tr>
           ))}
         </tbody>

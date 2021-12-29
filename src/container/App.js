@@ -17,6 +17,7 @@ import TaskService from "../services/Tasks/TaskService";
 import PhongBanCreate from "../components/PhongBan/PhongBanCreate";
 import PhongBan from "../components/PhongBan/PhongBan";
 import PhongBanChiTiet from "../components/PhongBan/PhongBanChiTiet";
+// import PhongBanService from "../services/PhongBan/PhongBanService";
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class App extends Component {
     this.deleteNhanVien = this.deleteNhanVien.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.deletePhongBan = this.deletePhongBan.bind(this);
+    // this.getPhongBanChiTiet = this.getPhongBanChiTiet.bind(this);
   }
 
   deleteProject(id) {
@@ -70,6 +72,12 @@ class App extends Component {
     console.log(`Phong ban id ${id} deleted`);
   }
 
+  // getPhongBanChiTiet(id) {
+  //   PhongBanService.getPhongBanChiTiet(id).then((response) => {
+  //     this.setState({ phongBanChiTiet: response.data });
+  //   });
+  // }
+
   componentDidMount() {
     axios.get("http://localhost:8080/api/vi/project").then((response) => {
       this.setState({ project: response.data });
@@ -87,11 +95,9 @@ class App extends Component {
       this.setState({ phongBan: response.data });
     });
 
-    axios
-      .get("http://localhost:8080/api/vi/phongBanChiTiet")
-      .then((response) => {
-        this.setState({ phongBanChiTiet: response.data });
-      });
+    // axios.get("http://localhost:8080/api/vi/phongBan/1").then((response) => {
+    //   this.setState({ phongBanChiTiet: response.data });
+    // });
 
     axios
       .get("http://localhost:8080/api/vi/trangThaiProject")
@@ -142,7 +148,7 @@ class App extends Component {
               <Route path="/task/create" element={<TaskCreate />} />
               <Route path="/phongBan/create" element={<PhongBanCreate />} />
               <Route
-                path="/congViec"  
+                path="/congViec"
                 element={
                   <Task task={this.state.task} deleteTask={this.deleteTask} />
                 }
@@ -168,9 +174,11 @@ class App extends Component {
                 }
               />
               <Route
-                path="/phongBan/chiTiet"
+                exact
+                path={"/phongBan/:id"}
                 element={
                   <PhongBanChiTiet
+                    getPhongBanChiTiet={this.getPhongBanChiTiet}
                     project={this.state.project}
                     phongBan={this.state.phongBanChiTiet}
                     nhanVien={this.state.nhanVien}

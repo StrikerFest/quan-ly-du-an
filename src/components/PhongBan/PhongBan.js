@@ -16,7 +16,7 @@ const PhongBan = (props) => {
         </thead>
         <tbody>
           {props.phongBan.map((PB) => (
-            <tr key={PB.index}>
+            <tr key={PB.idDuAn}>
               {/* Hiển thị tên project */}
               {props.project.map((P) =>
                 PB.idDuAn === P.id ? <td>{P.tenProject}</td> : ""
@@ -53,17 +53,23 @@ const PhongBan = (props) => {
                   ""
                 )
               )}
-              <td>Thay đổi</td>
+              <td></td>
               <td>
-                <Link to="/phongBan/chiTiet">Xem chi tiết</Link>
+                <Link to={"/phongBan/" + PB.idDuAn}>Xem chi tiết</Link>
+                {/* <button onClick={() => props.getPhongBanChiTiet(PB.idDuAn)}>
+                  Thay đổi
+                </button> */}
               </td>
+              {/* <td>
+                <Link to="/phongBan/chiTiet">Xem chi tiết</Link>
+              </td> */}
             </tr>
           ))}
         </tbody>
       </table>
-      <div>
+      {/* <div>
         <Link to="/phongBan/create">Tạo phân công mới</Link>
-      </div>
+      </div> */}
     </div>
   );
 };
