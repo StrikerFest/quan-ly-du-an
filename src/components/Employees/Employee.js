@@ -38,7 +38,7 @@ const Employee = (props) => {
               </td>
               {/* Thay đổi */}
               <td>
-                <button>Thay đổi</button>
+                <Link to={"/nhanVien/update/" + employee.id}>Thay đổi</Link>
               </td>
               {/* Delete */}
               <td>

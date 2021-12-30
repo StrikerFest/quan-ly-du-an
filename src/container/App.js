@@ -19,6 +19,7 @@ import PhongBanChiTiet from "../components/PhongBan/PhongBanChiTiet";
 import PhongBanService from "../services/PhongBan/PhongBanService";
 import ProjectUpdate from "../components/Projects/ProjectUpdate";
 import TaskUpdate from "../components/Tasks/TaskUpdate";
+import EmployeeUpdate from "../components/Employees/EmployeeUpdate";
 
 class App extends Component {
   // Constructor quản lý state và bind phương thức
@@ -155,6 +156,7 @@ class App extends Component {
               {/* Đường dẫn update của các trang */}
               <Route path="/project/update/:id" element={<ProjectUpdate />} />
               <Route path="/task/update/:id" element={<TaskUpdate />} />
+              <Route path="/nhanVien/update/:id" element={<EmployeeUpdate />} />
               {/* Đường dẫn đến list công việc */}
               <Route
                 path="task"
