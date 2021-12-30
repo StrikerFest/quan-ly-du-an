@@ -18,6 +18,11 @@ const ProjectUpdate = (props) => {
       .get("http://localhost:8080/api/vi/project/update/" + id)
       .then((response) => {
         setOldProject(response.data);
+        setTenProject(response.data.tenProject);
+        setNgayBatDau(response.data.ngayBatDau);
+        setTongThoiGianLam(response.data.tongThoiGianLam);
+        setIdProjectManager(response.data.idProjectManager);
+        setIdTrangThai(response.data.idTrangThai);
         console.log("response.data");
         console.log(response.data);
       });
@@ -31,13 +36,7 @@ const ProjectUpdate = (props) => {
       .then((response) => {
         setProjectManager(response.data);
       });
-    setTenProject(oldProject.tenProject);
-    setNgayBatDau(oldProject.ngayBatDau);
-    setTongThoiGianLam(oldProject.tongThoiGianLam);
-    setIdProjectManager(oldProject.idProjectManager);
-    setIdTrangThai(oldProject.idTrangThai);
   }, []);
-
   // lưu project - tạo biến và POST vào api
   const saveProject = (e) => {
     // e.preventDefault();

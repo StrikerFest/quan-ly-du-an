@@ -37,7 +37,7 @@ const Project = (props) => {
               </td>
               {/* Thay đổi */}
               <td>
-                <Link to={"/project/update/" + project.id}>Thay đổi</Link>
+                  <Link to={"/project/update/" + project.id}>Thay đổi</Link>
               </td>
               {/* Delete */}
               <td>
