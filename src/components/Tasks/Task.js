@@ -26,7 +26,7 @@ const Task = (props) => {
               <td>{task.tongThoiGian}</td>
               {/* Nút thay đổi */}
               <td>
-                <button>Thay đổi</button>
+                <Link to={"/task/update/" + task.id}>Thay đổi</Link>
               </td>
               {/* Nút xóa */}
               <td>
