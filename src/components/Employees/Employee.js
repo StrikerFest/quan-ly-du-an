@@ -14,7 +14,7 @@ const Employee = (props) => {
             <th>Chức vụ</th>
             <th>Thay đổi</th>
             <th>Xóa</th>
-            <th>Xem chi tiết</th>
+            {/* <th>Xem chi tiết</th>  */}
           </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@ const Employee = (props) => {
                   Delete
                 </button>
               </td>
-              <td>Xem chi tiết</td>
+              {/* <td>Xem chi tiết</td> */}
             </tr>
           ))}
         </tbody>
@@ -54,7 +54,6 @@ const Employee = (props) => {
       <div>
         <Link to="/nhanVien/create">Thêm nhân viên mới</Link>
       </div>
-      
     </div>
   );
 };

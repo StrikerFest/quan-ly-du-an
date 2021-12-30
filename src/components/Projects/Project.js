@@ -14,7 +14,7 @@ const Project = (props) => {
             <th>Trạng thái</th>
             <th>Thay đổi</th>
             <th>Xóa</th>
-            <th>Xem chi tiết</th>
+            {/* <th>Xem chi tiết</th> */}
           </tr>
         </thead>
         <tbody>
@@ -47,9 +47,9 @@ const Project = (props) => {
                   Delete
                 </button>
               </td>
-              <td>
+              {/* <td>
                 <Link to="/project/chiTiet">Xem chi tiết</Link>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>

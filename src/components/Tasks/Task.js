@@ -13,7 +13,7 @@ const Task = (props) => {
             <th>Tổng thời gian làm</th>
             <th>Thay đổi</th>
             <th>Xóa</th>
-            <th>Xem chi tiết</th>
+            {/* <th>Xem chi tiết</th> */}
           </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@ const Task = (props) => {
                   Delete
                 </button>
               </td>
-              <td>Xem chi tiết</td>
+              {/* <td>Xem chi tiết</td> */}
             </tr>
           ))}
         </tbody>
