@@ -159,7 +159,11 @@ class App extends Component {
               <Route
                 path="task"
                 element={
-                  <Task task={this.state.task} deleteTask={this.deleteTask} />
+                  <Task
+                    task={this.state.task}
+                    trangThaiTask={this.state.trangThaiTask}
+                    deleteTask={this.deleteTask}
+                  />
                 }
               />
               {/* Đường dẫn đến list nhân viên */}

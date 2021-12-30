@@ -127,11 +127,17 @@ const TaskUpdate = (props) => {
               <td>Trạng thái :</td>
               <td>
                 <select onChange={changeIdTrangThaiHandler}>
-                  {trangThai.map((trangThai) => (
-                    <option value={trangThai.id} key={trangThai.id}>
-                      {trangThai.tenTrangThaiTask}
-                    </option>
-                  ))}
+                  {trangThai.map((trangThai) =>
+                    idTrangThai === trangThai.id ? (
+                      <option value={trangThai.id} key={trangThai.id} selected>
+                        {trangThai.tenTrangThaiTask}
+                      </option>
+                    ) : (
+                      <option value={trangThai.id} key={trangThai.id}>
+                        {trangThai.tenTrangThaiTask}
+                      </option>
+                    )
+                  )}
                 </select>
               </td>
             </tr>

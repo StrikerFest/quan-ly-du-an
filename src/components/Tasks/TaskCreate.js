@@ -124,6 +124,7 @@ class TaskCreate extends Component {
                   <select onChange={this.changeIdTrangThaiHandler}>
                     {this.state.trangThai.map((trangThai) => (
                       <option value={trangThai.id} key={trangThai.id}>
+                        
                         {trangThai.tenTrangThaiTask}
                       </option>
                     ))}

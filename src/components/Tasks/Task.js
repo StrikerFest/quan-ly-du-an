@@ -12,6 +12,7 @@ const Task = (props) => {
             <th>Tên công việc</th>
             <th>Chỉ dẫn</th>
             <th>Tổng thời gian làm</th>
+            <th>Trạng thái</th>
             <th>Thay đổi</th>
             <th>Xóa</th>
             {/* <th>Xem chi tiết</th> */}
@@ -24,6 +25,12 @@ const Task = (props) => {
               <td>{task.tenTask}</td>
               <td>{task.chiDan}</td>
               <td>{task.tongThoiGian}</td>
+              {/* <td>{task.idTrangThai}</td> */}
+              <td>
+                {props.trangThaiTask.map((TTT) =>
+                  task.idTrangThai === TTT.id ? TTT.tenTrangThaiTask : ""
+                )}
+              </td>
               {/* Nút thay đổi */}
               <td>
                 <Link to={"/task/update/" + task.id}>Thay đổi</Link>
