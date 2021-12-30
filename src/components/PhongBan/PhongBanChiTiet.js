@@ -23,7 +23,7 @@ const PhongBan = (props) => {
             <th>Tên công việc</th>
             <th>Nhân viên được phân công</th>
             <th>Trạng thái</th>
-            <th>Thay đổi</th>
+            {/* <th>Thay đổi</th> */}
             <th>Xóa</th>
           </tr>
         </thead>
@@ -75,9 +75,9 @@ const PhongBan = (props) => {
                   ""
                 )
               )}
-              <td>
+              {/* <td>
                 <button>Thay đổi</button>
-              </td>
+              </td> */}
               <td>
                 <button
                   onClick={() => {
