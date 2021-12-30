@@ -25,7 +25,6 @@ const Task = (props) => {
               <td>{task.tenTask}</td>
               <td>{task.chiDan}</td>
               <td>{task.tongThoiGian}</td>
-              {/* <td>{task.idTrangThai}</td> */}
               <td>
                 {props.trangThaiTask.map((TTT) =>
                   task.idTrangThai === TTT.id ? TTT.tenTrangThaiTask : ""
