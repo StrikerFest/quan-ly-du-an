@@ -3,21 +3,24 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 const ProjectUpdate = (props) => {
+  // UseParams lấy id của trang cần update hiện tại
   const { id } = useParams();
+
+  // UserState dùng State trong functional component
   let [tenProject, setTenProject] = useState([]);
   let [ngayBatDau, setNgayBatDau] = useState([]);
   let [tongThoiGianLam, setTongThoiGianLam] = useState([]);
   let [idProjectManager, setIdProjectManager] = useState([]);
   let [idTrangThai, setIdTrangThai] = useState([]);
-  const [oldProject, setOldProject] = useState([]);
   const [projectManager, setProjectManager] = useState([]);
   const [trangThai, setTrangThai] = useState([]);
 
+  // Use effect xử lý side-effect - Lấy thông tin từ HTTP - Api
   useEffect(() => {
+    // Lấy api từ update để lấy object project cũ
     axios
       .get("http://localhost:8080/api/vi/project/update/" + id)
       .then((response) => {
-        setOldProject(response.data);
         setTenProject(response.data.tenProject);
         setNgayBatDau(response.data.ngayBatDau);
         setTongThoiGianLam(response.data.tongThoiGianLam);
@@ -37,7 +40,8 @@ const ProjectUpdate = (props) => {
         setProjectManager(response.data);
       });
   }, []);
-  // lưu project - tạo biến và POST vào api
+
+  // lưu project - tạo biến và PUT vào api
   const saveProject = (e) => {
     // e.preventDefault();
     let project = {
