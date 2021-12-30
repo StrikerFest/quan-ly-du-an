@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 class TaskCreate extends Component {
+  // Constructor tạo state, bind các phương thức handler
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +24,8 @@ class TaskCreate extends Component {
       this.setState({ trangThai: response.data });
     });
   }
-  //
+
+  // lưu công việc - tạo biến và POST vào api
   saveTask = (e) => {
     // e.preventDefault();
     let task = {
@@ -43,6 +45,7 @@ class TaskCreate extends Component {
     axios.post(`http://localhost:8080/api/vi/task/create`, task, config);
   };
 
+  // Các input handler function - cập nhật lên input khi có thay đổi
   changeTenHandler = (event) => {
     this.setState({ tenTask: event.target.value });
   };
@@ -59,7 +62,9 @@ class TaskCreate extends Component {
     this.setState({ idTrangThai: event.target.value });
   };
 
+  // Render
   render() {
+    // Css tạm cho table
     const styleTable = {
       border: "1px solid black",
       margin: "0 auto",
@@ -73,6 +78,7 @@ class TaskCreate extends Component {
         <form>
           <table style={styleTable}>
             <tbody>
+              {/* Tên task */}
               <tr>
                 <td>Tên công việc:</td>
                 <td>
@@ -85,6 +91,7 @@ class TaskCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Chỉ dẫn làm việc */}
               <tr>
                 <td>Chỉ dẫn :</td>
                 <td>
@@ -97,6 +104,7 @@ class TaskCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Tổng thời gian làm */}
               <tr>
                 <td>Tổng thời gian :</td>
                 <td>
@@ -109,6 +117,7 @@ class TaskCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Trạng thái */}
               <tr>
                 <td>Trạng thái :</td>
                 <td>
@@ -121,6 +130,7 @@ class TaskCreate extends Component {
                   </select>
                 </td>
               </tr>
+              {/* Submit */}
               <tr>
                 <td colSpan="2">
                   <button type="submit" onClick={this.saveTask}>
@@ -131,6 +141,7 @@ class TaskCreate extends Component {
             </tbody>
           </table>
         </form>
+        {/* Link quay về */}
         <div>
           <Link to="/task">Quay lại</Link>
         </div>

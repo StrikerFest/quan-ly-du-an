@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 class ProjectCreate extends Component {
+  // Constructor tạo state, bind các phương thức handler
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +24,7 @@ class ProjectCreate extends Component {
     this.changeIdTrangThaiHandler = this.changeIdTrangThaiHandler.bind(this);
   }
 
+  // xử lý request api
   componentDidMount() {
     axios
       .get("http://localhost:8080/api/vi/trangThaiProject")
@@ -35,7 +37,8 @@ class ProjectCreate extends Component {
         this.setState({ projectManager: response.data });
       });
   }
-  //
+
+  // lưu project - tạo biến và POST vào api
   saveProject = (e) => {
     // e.preventDefault();
     let project = {
@@ -56,6 +59,7 @@ class ProjectCreate extends Component {
     axios.post(`http://localhost:8080/api/vi/project/create`, project, config);
   };
 
+  // Các input handler function - cập nhật lên input khi có thay đổi
   changeTenHandler = (event) => {
     this.setState({ tenProject: event.target.value });
   };
@@ -76,7 +80,9 @@ class ProjectCreate extends Component {
     this.setState({ idTrangThai: event.target.value });
   };
 
+  // Render
   render() {
+    // Css tạm cho table
     const styleTable = {
       border: "1px solid black",
       margin: "0 auto",
@@ -90,6 +96,7 @@ class ProjectCreate extends Component {
         <form>
           <table style={styleTable}>
             <tbody>
+              {/* Tên */}
               <tr>
                 <td>Tên :</td>
                 <td>
@@ -102,6 +109,7 @@ class ProjectCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Ngày bắt đầu */}
               <tr>
                 <td>Ngày bắt đầu :</td>
                 <td>
@@ -113,6 +121,7 @@ class ProjectCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Tổng thời gian làm */}
               <tr>
                 <td>Tổng thời gian làm :</td>
                 <td>
@@ -125,6 +134,7 @@ class ProjectCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Project manager */}
               <tr>
                 <td>Project manager :</td>
                 <td>
@@ -137,6 +147,7 @@ class ProjectCreate extends Component {
                   </select>
                 </td>
               </tr>
+              {/* Trạng thái */}
               <tr>
                 <td>Trạng thái :</td>
                 <td>
@@ -152,6 +163,7 @@ class ProjectCreate extends Component {
                   </select>
                 </td>
               </tr>
+              {/* Submit */}
               <tr>
                 <td colSpan="2">
                   <button type="submit" onClick={this.saveProject}>
@@ -162,6 +174,7 @@ class ProjectCreate extends Component {
             </tbody>
           </table>
         </form>
+        {/* Link quay lại */}
         <div>
           <Link to="/project">Quay lại</Link>
         </div>

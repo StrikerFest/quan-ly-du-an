@@ -15,6 +15,7 @@ const PhongBan = (props) => {
     <div>
       <h1>Phòng ban dự án {id}</h1>
       <table className="main-content" border="2">
+        {/* Table head */}
         <thead>
           <tr className="font-red">
             <th>Tên dự án X</th>
@@ -26,6 +27,7 @@ const PhongBan = (props) => {
             <th>Xóa</th>
           </tr>
         </thead>
+        {/* Table body */}
         <tbody>
           {phongBan.map((PB) => (
             <tr key={PB.index}>
@@ -50,7 +52,6 @@ const PhongBan = (props) => {
                 )
               )}
               {/* Hiển thị tên công việc */}
-              {/* <td>{PB.idCongViec}</td> */}
               {props.task.map((T) =>
                 PB.idCongViec === T.id ? <td>{T.tenTask}</td> : ""
               )}
@@ -94,9 +95,11 @@ const PhongBan = (props) => {
           ))}
         </tbody>
       </table>
+      {/* Link tạo mới */}
       <div>
         <Link to="/phongBan/create">Tạo phân công mới</Link>
       </div>
+      {/* Link quay về */}
       <div>
         <Link to="/phongBan">Quay lại</Link>
       </div>

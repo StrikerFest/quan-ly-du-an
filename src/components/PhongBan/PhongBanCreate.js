@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 class PhongBanCreate extends Component {
+  // Constructor tạo state, bind các phương thức handler
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +19,7 @@ class PhongBanCreate extends Component {
     this.changeIdNhanVienHandler = this.changeIdNhanVienHandler.bind(this);
   }
 
+  // xử lý request api
   componentDidMount() {
     axios.get("http://localhost:8080/api/vi/project").then((response) => {
       this.setState({ project: response.data });
@@ -30,7 +32,8 @@ class PhongBanCreate extends Component {
       this.setState({ nhanVien: response.data });
     });
   }
-  //
+
+  // lưu phòng ban - tạo biến và POST vào api
   savePhongBan = (e) => {
     // e.preventDefault();
     let phongBan = {
@@ -53,6 +56,7 @@ class PhongBanCreate extends Component {
     );
   };
 
+  // Các input handler function - cập nhật lên input khi có thay đổi
   changeIdDuAnHandler = (event) => {
     this.setState({ idDuAn: event.target.value });
   };
@@ -65,7 +69,9 @@ class PhongBanCreate extends Component {
     this.setState({ idNhanVien: event.target.value });
   };
 
+  // Render
   render() {
+    // Css tạm cho table
     const styleTable = {
       border: "1px solid black",
       margin: "0 auto",
@@ -75,11 +81,11 @@ class PhongBanCreate extends Component {
 
     return (
       <div>
-        {/* <button onClick={this.some}>HAYEAYEDHASDN</button> */}
         <h1>Phân công</h1>
         <form>
           <table style={styleTable}>
             <tbody>
+              {/* Project */}
               <tr>
                 <td>Project :</td>
                 <td>
@@ -93,6 +99,7 @@ class PhongBanCreate extends Component {
                   </select>
                 </td>
               </tr>
+              {/* Công việc */}
               <tr>
                 <td>Công việc :</td>
                 <td>
@@ -109,6 +116,7 @@ class PhongBanCreate extends Component {
                   </select>
                 </td>
               </tr>
+              {/* Nhân viên */}
               <tr>
                 <td>Nhân viên :</td>
                 <td>
@@ -132,6 +140,7 @@ class PhongBanCreate extends Component {
                   </select>
                 </td>
               </tr>
+              {/* Nhập */}
               <tr>
                 <td colSpan="2">
                   <button type="submit" onClick={this.savePhongBan}>
@@ -141,10 +150,11 @@ class PhongBanCreate extends Component {
               </tr>
             </tbody>
           </table>
-          <div>
-            <Link to="/phongBan">Quay lại</Link>
-          </div>
         </form>
+        {/* Link quay về */}
+        <div>
+          <Link to="/phongBan">Quay lại</Link>
+        </div>
       </div>
     );
   }

@@ -6,6 +6,7 @@ const Employee = (props) => {
     <div>
       <h1>Nhân viên</h1>
       <table className="main-content" border="2">
+        {/* Table head */}
         <thead>
           <tr className="font-red">
             <th>Tên nhân viên</th>
@@ -17,6 +18,7 @@ const Employee = (props) => {
             {/* <th>Xem chi tiết</th>  */}
           </tr>
         </thead>
+        {/* Table body */}
         <tbody>
           {props.employee.map((employee) => (
             <tr key={employee.id}>
@@ -34,9 +36,11 @@ const Employee = (props) => {
                   ? "Nhân viên"
                   : "Lỗi"}
               </td>
+              {/* Thay đổi */}
               <td>
                 <button>Thay đổi</button>
               </td>
+              {/* Delete */}
               <td>
                 <button
                   onClick={() => {
@@ -51,6 +55,7 @@ const Employee = (props) => {
           ))}
         </tbody>
       </table>
+      {/* Link tạo mới */}
       <div>
         <Link to="/nhanVien/create">Thêm nhân viên mới</Link>
       </div>

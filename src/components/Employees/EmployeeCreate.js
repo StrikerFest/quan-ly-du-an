@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 class EmployeeCreate extends Component {
+  // Constructor tạo state, bind các phương thức handler
   constructor(props) {
     super(props);
     this.state = {
@@ -17,8 +18,10 @@ class EmployeeCreate extends Component {
     this.changeQuyenHanHandler = this.changeQuyenHanHandler.bind(this);
   }
 
+  // xử lý request api
   componentDidMount() {}
-  //
+
+  // lưu nhân viên - tạo biến và POST vào api
   saveNhanVien = (e) => {
     // e.preventDefault();
     let nhanVien = {
@@ -42,6 +45,7 @@ class EmployeeCreate extends Component {
     );
   };
 
+  // Các input handler function - cập nhật lên input khi có thay đổi
   changeTenHandler = (event) => {
     this.setState({ tenNhanSu: event.target.value });
   };
@@ -58,7 +62,9 @@ class EmployeeCreate extends Component {
     this.setState({ quyenHan: event.target.value });
   };
 
+  // Render
   render() {
+    // Css tạm cho table
     const styleTable = {
       border: "1px solid black",
       margin: "0 auto",
@@ -68,11 +74,11 @@ class EmployeeCreate extends Component {
 
     return (
       <div>
-        {/* <button onClick={this.some}>HAYEAYEDHASDN</button> */}
         <h1>Nhân viên</h1>
         <form>
           <table style={styleTable}>
             <tbody>
+              {/* Tên */}
               <tr>
                 <td>Tên :</td>
                 <td>
@@ -84,6 +90,7 @@ class EmployeeCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Số điện thoại */}
               <tr>
                 <td>Số điện thoại :</td>
                 <td>
@@ -95,6 +102,7 @@ class EmployeeCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Email */}
               <tr>
                 <td>Email :</td>
                 <td>
@@ -106,6 +114,7 @@ class EmployeeCreate extends Component {
                   />
                 </td>
               </tr>
+              {/* Quyền hạn */}
               <tr>
                 <td>Quyền hạn :</td>
                 <td>
@@ -119,6 +128,7 @@ class EmployeeCreate extends Component {
                   </select>
                 </td>
               </tr>
+              {/* Submit */}
               <tr>
                 <td colSpan="2">
                   <button type="submit" onClick={this.saveNhanVien}>
@@ -129,6 +139,7 @@ class EmployeeCreate extends Component {
             </tbody>
           </table>
         </form>
+        {/* Link quay về */}
         <div>
           <Link to="/nhanVien">Quay lại</Link>
         </div>

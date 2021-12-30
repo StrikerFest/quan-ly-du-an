@@ -6,6 +6,7 @@ const Task = (props) => {
     <div>
       <h1>Công việc</h1>
       <table className="main-content" border="2">
+        {/* Table head */}
         <thead>
           <tr className="font-red">
             <th>Tên công việc</th>
@@ -17,14 +18,17 @@ const Task = (props) => {
           </tr>
         </thead>
         <tbody>
+          {/* Table body */}
           {props.task.map((task) => (
             <tr key={task.id}>
               <td>{task.tenTask}</td>
               <td>{task.chiDan}</td>
               <td>{task.tongThoiGian}</td>
+              {/* Nút thay đổi */}
               <td>
                 <button>Thay đổi</button>
               </td>
+              {/* Nút xóa */}
               <td>
                 <button
                   onClick={() => {
@@ -39,6 +43,7 @@ const Task = (props) => {
           ))}
         </tbody>
       </table>
+      {/* Link tạo mới */}
       <div>
         <Link to="/task/create">Tạo công việc mới</Link>
       </div>
