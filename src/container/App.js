@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-// import ProjectService from "../services/Projects/ProjectService";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "../components/UI/Header/Navbar/Navbar";
 import Project from "../components/Projects/Project";
@@ -20,6 +19,7 @@ import PhongBanChiTiet from "../components/PhongBan/PhongBanChiTiet";
 import PhongBanService from "../services/PhongBan/PhongBanService";
 
 class App extends Component {
+  // Constructor quản lý state và bind phương thức
   constructor(props) {
     super(props);
 
@@ -37,9 +37,9 @@ class App extends Component {
     this.deleteNhanVien = this.deleteNhanVien.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.deletePhongBan = this.deletePhongBan.bind(this);
-    // this.getPhongBanChiTiet = this.getPhongBanChiTiet.bind(this);
   }
 
+  // Phương thức handler delete
   deleteProject(id) {
     ProjectService.deleteProject(id).then((res) => {
       this.setState({
@@ -68,21 +68,10 @@ class App extends Component {
       window.location.reload()
     );
 
-    // (res) => {
-    //   this.setState({
-    //     phongBan: this.state.phongBan.filter((phongBan) => {}),
-    //   });
-    // }
-
     console.log(`Phong ban id ${idDuAn} ${idCongViec} ${idNhanVien} deleted`);
   }
 
-  // getPhongBanChiTiet(id) {
-  //   PhongBanService.getPhongBanChiTiet(id).then((response) => {
-  //     this.setState({ phongBanChiTiet: response.data });
-  //   });
-  // }
-
+  // Lấy API
   componentDidMount() {
     axios.get("http://localhost:8080/api/vi/project").then((response) => {
       this.setState({ project: response.data });
@@ -100,10 +89,6 @@ class App extends Component {
       this.setState({ phongBan: response.data });
     });
 
-    // axios.get("http://localhost:8080/api/vi/phongBan/1").then((response) => {
-    //   this.setState({ phongBanChiTiet: response.data });
-    // });
-
     axios
       .get("http://localhost:8080/api/vi/trangThaiProject")
       .then((response) => {
@@ -117,11 +102,14 @@ class App extends Component {
 
   render() {
     return (
+      // BrowserRouter để sử dụng React Route
       <BrowserRouter>
         <div className="App">
           <NavBar />
           <div className="main-content">
+            {/* Switch cũ */}
             <Routes>
+              {/* Mặc định trang index sẽ xuất list project */}
               <Route
                 path="/"
                 element={
@@ -133,6 +121,7 @@ class App extends Component {
                   />
                 }
               />
+              {/* Đường dẫn project */}
               <Route
                 path="/project"
                 element={
@@ -144,20 +133,24 @@ class App extends Component {
                   />
                 }
               />
+              {/* Đường dẫn xem chi tiết project - Bỏ tạm thời */}
               <Route
                 path="/project/chiTiet"
                 element={<ProjectDetail project={this.state.project} />}
               />
+              {/* Đường dẫn create của các trang */}
               <Route path="/project/create" element={<ProjectCreate />} />
               <Route path="/nhanVien/create" element={<EmployeeCreate />} />
               <Route path="/task/create" element={<TaskCreate />} />
               <Route path="/phongBan/create" element={<PhongBanCreate />} />
+              {/* Đường dẫn đến list công việc */}
               <Route
                 path="task"
                 element={
                   <Task task={this.state.task} deleteTask={this.deleteTask} />
                 }
               />
+              {/* Đường dẫn đến list nhân viên */}
               <Route
                 path="/nhanVien"
                 element={
@@ -167,6 +160,7 @@ class App extends Component {
                   />
                 }
               />
+              {/* Đường dẫn đến list phòng ban */}
               <Route
                 path="/phongBan"
                 element={
@@ -178,6 +172,7 @@ class App extends Component {
                   />
                 }
               />
+              {/* Đường dẫn đến phòng ban chi tiết theo id */}
               <Route
                 exact
                 path={"/phongBan/:id"}
