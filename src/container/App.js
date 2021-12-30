@@ -17,6 +17,7 @@ import PhongBanCreate from "../components/PhongBan/PhongBanCreate";
 import PhongBan from "../components/PhongBan/PhongBan";
 import PhongBanChiTiet from "../components/PhongBan/PhongBanChiTiet";
 import PhongBanService from "../services/PhongBan/PhongBanService";
+import ProjectUpdate from "../components/Projects/ProjectUpdate";
 
 class App extends Component {
   // Constructor quản lý state và bind phương thức
@@ -27,6 +28,7 @@ class App extends Component {
       project: [],
       task: [],
       nhanVien: [],
+      PM: [],
       phongBan: [],
       phongBanChiTiet: [],
       trangThaiProject: [],
@@ -84,6 +86,12 @@ class App extends Component {
     axios.get("http://localhost:8080/api/vi/nhanSu").then((response) => {
       this.setState({ nhanVien: response.data });
     });
+
+    axios
+      .get("http://localhost:8080/api/vi/projectManager")
+      .then((response) => {
+        this.setState({ PM: response.data });
+      });
 
     axios.get("http://localhost:8080/api/vi/phongBan").then((response) => {
       this.setState({ phongBan: response.data });
@@ -143,6 +151,13 @@ class App extends Component {
               <Route path="/nhanVien/create" element={<EmployeeCreate />} />
               <Route path="/task/create" element={<TaskCreate />} />
               <Route path="/phongBan/create" element={<PhongBanCreate />} />
+              {/* Đường dẫn update của các trang */}
+              <Route
+                path="/project/update/:id"
+                projectManager={this.state.PM}
+                trangThaiProject={this.state.trangThaiProject}
+                element={<ProjectUpdate />}
+              />
               {/* Đường dẫn đến list công việc */}
               <Route
                 path="task"
