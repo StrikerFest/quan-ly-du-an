@@ -35,6 +35,7 @@ class App extends Component {
       phongBanChiTiet: [],
       trangThaiProject: [],
       trangThaiTask: [],
+      error: "",
     };
 
     this.deleteProject = this.deleteProject.bind(this);
@@ -45,57 +46,85 @@ class App extends Component {
 
   // Phương thức handler delete
   deleteProject(id) {
-    ProjectService.deleteProject(id).then((res) => {
-      this.setState({
-        project: this.state.project.filter((project) => project.id !== id),
+    ProjectService.deleteProject(id)
+      .then((res) => {
+        this.setState({
+          project: this.state.project.filter((project) => project.id !== id),
+        });
+      })
+      .catch((err) => {
+        this.setState({ error: "Không được xóa project này" });
+        setTimeout(
+          function () {
+            this.setState({ error: "" });
+          }.bind(this),
+          1000
+        );
       });
-    });
   }
 
   deleteNhanVien(id) {
-    EmployeeService.deleteNhanVien(id).then((res) => {
-      this.setState({
-        nhanVien: this.state.nhanVien.filter((nhanVien) => nhanVien.id !== id),
+    EmployeeService.deleteNhanVien(id)
+      .then((res) => {
+        this.setState({
+          nhanVien: this.state.nhanVien.filter(
+            (nhanVien) => nhanVien.id !== id
+          ),
+        });
+      })
+      .catch((err) => {
+        this.setState({ error: "Không được xóa nhân viên này" });
+        setTimeout(
+          function () {
+            this.setState({ error: "" });
+          }.bind(this),
+          1000
+        );
       });
-    });
   }
 
   deleteTask(id) {
-    TaskService.deleteTask(id).then((res) => {
-      this.setState({
-        task: this.state.task.filter((task) => task.id !== id),
+    TaskService.deleteTask(id)
+      .then((res) => {
+        this.setState({
+          task: this.state.task.filter((task) => task.id !== id),
+        });
+      })
+      .catch((err) => {
+        this.setState({ error: "Không được xóa công việc này" });
+        setTimeout(
+          function () {
+            this.setState({ error: "" });
+          }.bind(this),
+          1000
+        );
       });
-    });
   }
   deletePhongBan(idDuAn, idCongViec, idNhanVien) {
     PhongBanService.deletePhongBan(idDuAn, idCongViec, idNhanVien).then(
       window.location.reload()
     );
-
-    console.log(`Phong ban id ${idDuAn} ${idCongViec} ${idNhanVien} deleted`);
   }
 
   // Lấy API
   componentDidMount() {
-    axios.get("http://localhost:8080/api/vi/project").then((response) => {
+    ProjectService.getProjects().then((response) => {
       this.setState({ project: response.data });
     });
 
-    axios.get("http://localhost:8080/api/vi/task").then((response) => {
+    TaskService.getTask().then((response) => {
       this.setState({ task: response.data });
     });
 
-    axios.get("http://localhost:8080/api/vi/nhanSu").then((response) => {
-      this.setState({ nhanVien: response.data });
-    });
-
-    axios
-      .get("http://localhost:8080/api/vi/projectManager")
+    EmployeeService.getNhanVien()
       .then((response) => {
-        this.setState({ PM: response.data });
+        this.setState({ nhanVien: response.data });
+      })
+      .catch((err) => {
+        console.log(err);
       });
 
-    axios.get("http://localhost:8080/api/vi/phongBan").then((response) => {
+    PhongBanService.getPhongBan().then((response) => {
       this.setState({ phongBan: response.data });
     });
 
@@ -111,13 +140,16 @@ class App extends Component {
   }
 
   render() {
+    const styleError = {
+      color: "red",
+    };
     return (
       // BrowserRouter để sử dụng React Route
       <BrowserRouter>
         <div className="App">
           <NavBar />
           <div className="main-content">
-            {/* Switch cũ */}
+            <h1 style={styleError}>{this.state.error}</h1>
             <Routes>
               {/* Mặc định trang index sẽ xuất list project */}
               <Route
@@ -131,7 +163,7 @@ class App extends Component {
                   />
                 }
               />
-              {/* Đường dẫn project */}
+              {/* Đường dẫn đến list project */}
               <Route
                 path="/project"
                 element={
@@ -143,20 +175,6 @@ class App extends Component {
                   />
                 }
               />
-              {/* Đường dẫn xem chi tiết project - Bỏ tạm thời */}
-              <Route
-                path="/project/chiTiet"
-                element={<ProjectDetail project={this.state.project} />}
-              />
-              {/* Đường dẫn create của các trang */}
-              <Route path="/project/create" element={<ProjectCreate />} />
-              <Route path="/nhanVien/create" element={<EmployeeCreate />} />
-              <Route path="/task/create" element={<TaskCreate />} />
-              <Route path="/phongBan/create" element={<PhongBanCreate />} />
-              {/* Đường dẫn update của các trang */}
-              <Route path="/project/update/:id" element={<ProjectUpdate />} />
-              <Route path="/task/update/:id" element={<TaskUpdate />} />
-              <Route path="/nhanVien/update/:id" element={<EmployeeUpdate />} />
               {/* Đường dẫn đến list công việc */}
               <Route
                 path="task"
@@ -190,6 +208,11 @@ class App extends Component {
                   />
                 }
               />
+              {/* Đường dẫn xem chi tiết project - Bỏ tạm thời */}
+              <Route
+                path="/project/chiTiet"
+                element={<ProjectDetail project={this.state.project} />}
+              />
               {/* Đường dẫn đến phòng ban chi tiết theo id */}
               <Route
                 exact
@@ -206,6 +229,15 @@ class App extends Component {
                   />
                 }
               />
+              {/* Đường dẫn create của các trang */}
+              <Route path="/project/create" element={<ProjectCreate />} />
+              <Route path="/nhanVien/create" element={<EmployeeCreate />} />
+              <Route path="/task/create" element={<TaskCreate />} />
+              <Route path="/phongBan/create" element={<PhongBanCreate />} />
+              {/* Đường dẫn update của các trang */}
+              <Route path="/project/update/:id" element={<ProjectUpdate />} />
+              <Route path="/task/update/:id" element={<TaskUpdate />} />
+              <Route path="/nhanVien/update/:id" element={<EmployeeUpdate />} />
             </Routes>
           </div>
         </div>

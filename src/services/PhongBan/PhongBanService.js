@@ -5,12 +5,12 @@ const PHONG_BAN_REST_API_URL = "http://localhost:8080/api/vi/phongBan";
 class PhongBanService {
   // Phương thức lấy phòng ban
   getPhongBan() {
-    axios.get(PHONG_BAN_REST_API_URL);
+    return axios.get(PHONG_BAN_REST_API_URL);
   }
 
   // Phương thức lấy chi tiết phòng ban
   getPhongBanChiTiet(id) {
-    axios.get(PHONG_BAN_REST_API_URL + "/" + id);
+    return axios.get(PHONG_BAN_REST_API_URL + "/" + id);
   }
 
   // Phương thức tạo phòng ban

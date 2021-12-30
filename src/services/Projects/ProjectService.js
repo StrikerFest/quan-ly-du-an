@@ -5,7 +5,7 @@ const PROJECTS_REST_API_URL = "http://localhost:8080/api/vi/project";
 class ProjectService {
   // Phương thức lấy project
   getProjects() {
-    axios.get("http://localhost:8080/api/vi/project");
+    return axios.get(PROJECTS_REST_API_URL);
   }
 
   // Phương thức tạo project

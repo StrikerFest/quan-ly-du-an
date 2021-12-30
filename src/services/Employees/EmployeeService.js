@@ -5,7 +5,7 @@ const EMPLOYEES_REST_API_URL = "http://localhost:8080/api/vi/nhanVien";
 class EmployeeService {
   // Phương thức lấy nhân viên
   getNhanVien() {
-    axios.get(EMPLOYEES_REST_API_URL);
+    return axios.get(EMPLOYEES_REST_API_URL);
   }
 
   // Phương thức tạo nhân viên
