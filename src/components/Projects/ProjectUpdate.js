@@ -143,7 +143,10 @@ const ProjectUpdate = (props) => {
             <tr>
               <td>Project manager :</td>
               <td>
-                <select onChange={changeIdProjectManagerHandler}>
+                <select
+                  value={idProjectManager}
+                  onChange={changeIdProjectManagerHandler}
+                >
                   {projectManager.map((projectManager) => (
                     <option value={projectManager.id} key={projectManager.id}>
                       {projectManager.tenNhanSu}
