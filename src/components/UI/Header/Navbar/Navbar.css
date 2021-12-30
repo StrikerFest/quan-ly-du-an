@@ -20,7 +20,7 @@
   padding: 16px 16px;
   vertical-align: middle;
 
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .navBarLink a {

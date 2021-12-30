@@ -74,7 +74,9 @@ const PhongBan = (props) => {
                   ""
                 )
               )}
-              <td>Thay đổi</td>
+              <td>
+                <button>Thay đổi</button>
+              </td>
               <td>
                 <button
                   onClick={() => {
@@ -94,6 +96,9 @@ const PhongBan = (props) => {
       </table>
       <div>
         <Link to="/phongBan/create">Tạo phân công mới</Link>
+      </div>
+      <div>
+        <Link to="/phongBan">Quay lại</Link>
       </div>
     </div>
   );

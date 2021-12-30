@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class PhongBanCreate extends Component {
@@ -140,6 +141,9 @@ class PhongBanCreate extends Component {
               </tr>
             </tbody>
           </table>
+          <div>
+            <Link to="/phongBan">Quay lại</Link>
+          </div>
         </form>
       </div>
     );

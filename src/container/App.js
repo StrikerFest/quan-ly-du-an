@@ -153,7 +153,7 @@ class App extends Component {
               <Route path="/task/create" element={<TaskCreate />} />
               <Route path="/phongBan/create" element={<PhongBanCreate />} />
               <Route
-                path="/congViec"
+                path="task"
                 element={
                   <Task task={this.state.task} deleteTask={this.deleteTask} />
                 }

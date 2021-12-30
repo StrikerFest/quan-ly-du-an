@@ -10,7 +10,6 @@ const PhongBan = (props) => {
             <th>Tên dự án</th>
             <th>Project Manager</th>
             <th>Trạng thái</th>
-            <th>Thay đổi</th>
             <th>Xem chi tiết</th>
           </tr>
         </thead>
@@ -53,23 +52,13 @@ const PhongBan = (props) => {
                   ""
                 )
               )}
-              <td></td>
               <td>
                 <Link to={"/phongBan/" + PB.idDuAn}>Xem chi tiết</Link>
-                {/* <button onClick={() => props.getPhongBanChiTiet(PB.idDuAn)}>
-                  Thay đổi
-                </button> */}
               </td>
-              {/* <td>
-                <Link to="/phongBan/chiTiet">Xem chi tiết</Link>
-              </td> */}
             </tr>
           ))}
         </tbody>
       </table>
-      {/* <div>
-        <Link to="/phongBan/create">Tạo phân công mới</Link>
-      </div> */}
     </div>
   );
 };

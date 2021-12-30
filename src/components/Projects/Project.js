@@ -35,7 +35,9 @@ const Project = (props) => {
                   project.idTrangThai === TT.id ? TT.tenTrangThai : ""
                 )}
               </td>
-              <td></td>
+              <td>
+                <button>Thay đổi</button>
+              </td>
               <td>
                 <button
                   onClick={() => {

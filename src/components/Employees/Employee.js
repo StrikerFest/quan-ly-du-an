@@ -34,7 +34,9 @@ const Employee = (props) => {
                   ? "Nhân viên"
                   : "Lỗi"}
               </td>
-              <td></td>
+              <td>
+                <button>Thay đổi</button>
+              </td>
               <td>
                 <button
                   onClick={() => {
@@ -52,6 +54,7 @@ const Employee = (props) => {
       <div>
         <Link to="/nhanVien/create">Thêm nhân viên mới</Link>
       </div>
+      
     </div>
   );
 };

@@ -22,7 +22,9 @@ const Task = (props) => {
               <td>{task.tenTask}</td>
               <td>{task.chiDan}</td>
               <td>{task.tongThoiGian}</td>
-              <td></td>
+              <td>
+                <button>Thay đổi</button>
+              </td>
               <td>
                 <button
                   onClick={() => {

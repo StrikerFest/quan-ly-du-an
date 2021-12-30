@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class TaskCreate extends Component {
   constructor(props) {
@@ -68,7 +69,6 @@ class TaskCreate extends Component {
 
     return (
       <div>
-        {/* <button onClick={this.some}>HAYEAYEDHASDN</button> */}
         <h1>Công việc</h1>
         <form>
           <table style={styleTable}>
@@ -81,6 +81,7 @@ class TaskCreate extends Component {
                     name="tenTask"
                     value={this.state.tenTask}
                     onChange={this.changeTenHandler}
+                    placeholder="Nhập tên công việc"
                   />
                 </td>
               </tr>
@@ -92,6 +93,7 @@ class TaskCreate extends Component {
                     name="chiDan"
                     value={this.state.chiDan}
                     onChange={this.changeChiDanHandler}
+                    placeholder="Chỉ dẫn làm việc"
                   />
                 </td>
               </tr>
@@ -103,6 +105,7 @@ class TaskCreate extends Component {
                     name="tongThoiGian"
                     value={this.state.tongThoiGian}
                     onChange={this.changeTongThoiGianHandler}
+                    placeholder="Tổng giờ làm"
                   />
                 </td>
               </tr>
@@ -128,6 +131,9 @@ class TaskCreate extends Component {
             </tbody>
           </table>
         </form>
+        <div>
+          <Link to="/task">Quay lại</Link>
+        </div>
       </div>
     );
   }

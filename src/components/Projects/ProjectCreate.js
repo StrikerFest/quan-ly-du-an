@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class ProjectCreate extends Component {
@@ -85,7 +86,6 @@ class ProjectCreate extends Component {
 
     return (
       <div>
-        {/* <button onClick={this.some}>HAYEAYEDHASDN</button> */}
         <h1>Project</h1>
         <form>
           <table style={styleTable}>
@@ -98,6 +98,7 @@ class ProjectCreate extends Component {
                     name="ten"
                     value={this.state.tenProject}
                     onChange={this.changeTenHandler}
+                    placeholder="Nhập tên project"
                   />
                 </td>
               </tr>
@@ -120,6 +121,7 @@ class ProjectCreate extends Component {
                     name="tongThoiGian"
                     value={this.state.tongThoiGianLam}
                     onChange={this.changeTongThoiGianLamHandler}
+                    placeholder="Nhập tổng giờ làm"
                   />
                 </td>
               </tr>
@@ -160,6 +162,9 @@ class ProjectCreate extends Component {
             </tbody>
           </table>
         </form>
+        <div>
+          <Link to="/project">Quay lại</Link>
+        </div>
       </div>
     );
   }
