@@ -5,7 +5,7 @@ const TASK_REST_API_URL = "http://localhost:8080/api/vi/task";
 class TaskService {
   // Phương thức lấy công việc
   getTask() {
-    axios.get(TASK_REST_API_URL);
+    return axios.get(TASK_REST_API_URL);
   }
 
   // Phương thức tạo công việc
